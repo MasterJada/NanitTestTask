@@ -9,16 +9,15 @@ import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.os.Environment
-import android.provider.MediaStore
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.FileProvider
 import androidx.fragment.app.FragmentManager
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import dev.jetlaunch.nanittesttask.R
+import dev.jetlaunch.nanittesttask.utils.Constants
 import dev.jetlaunch.nanittesttask.viewmodels.MainViewModel
 import kotlinx.android.synthetic.main.bottom_sheet_dialog_picker_layout.*
 import org.koin.android.viewmodel.ext.android.sharedViewModel
@@ -87,7 +86,7 @@ class BottomSheetDialogPicker : BottomSheetDialogFragment() {
         )
         val uri = FileProvider.getUriForFile(
             requireContext(),
-            "dev.jetlaunch.nanittesttask.fileprovider",
+            Constants.AUTHORITY,
             file
         )
         registerForActivityResult(ActivityResultContracts.TakePicture()) {

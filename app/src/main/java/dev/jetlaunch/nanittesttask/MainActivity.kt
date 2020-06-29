@@ -24,7 +24,7 @@ class MainActivity : AppCompatActivity(){
         viewModel.moveToBirthdayScreenAction.observe(this, Observer {
             supportFragmentManager.commit {
                 replace(R.id.container, GiftCardFragment.newInstance)
-                addToBackStack("gift_card")
+                addToBackStack("GIFT_CARD")
             }
         })
 

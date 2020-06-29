@@ -6,11 +6,7 @@ import dev.jetlaunch.nanittesttask.model.BabyData
 import org.joda.time.DateTime
 import org.joda.time.Days
 import org.joda.time.Months
-import java.time.LocalDate
-import java.time.Month
-import java.time.Period
 import java.util.*
-import java.util.concurrent.TimeUnit
 
 class BabyDataProcessor(private val context: Context) {
 

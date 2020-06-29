@@ -3,11 +3,9 @@ package dev.jetlaunch.nanittesttask.utils
 import android.graphics.Bitmap
 import android.view.View
 import android.widget.DatePicker
-import android.widget.ImageView
 import androidx.appcompat.widget.AppCompatImageView
 import androidx.databinding.*
 import com.google.android.material.imageview.ShapeableImageView
-import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
 import java.util.*
 
