@@ -1,32 +1,165 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<layout xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <data>
+        <variable
+            name="vm"
+            type="dev.jetlaunch.nanittesttask.viewmodels.MainViewModel" />
+    </data>
 
-    <com.google.android.material.imageview.ShapeableImageView
-        android:layout_width="280dp"
-        android:layout_height="0dp"
-        app:layout_constraintBottom_toBottomOf="@id/iv_card"
-        app:layout_constraintDimensionRatio="w,1:1"
-        app:layout_constraintEnd_toEndOf="@id/iv_card"
-        app:layout_constraintStart_toStartOf="@id/iv_card"
-        app:layout_constraintTop_toTopOf="@id/iv_card"
-        app:layout_constraintVertical_bias="0.78"
-        app:shapeAppearanceOverlay="@style/roundedImage"
-        tools:srcCompat="@tools:sample/avatars" />
+    <FrameLayout
+        backgroundImageResource="@{vm.babyData.backgroundColorRecourse}"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
-    <ImageView
-        android:id="@+id/iv_card"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:scaleType="centerCrop"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@mipmap/android_elephant_popup" />
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            app:cardCornerRadius="10dp"
+            app:cardElevation="10dp">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/gift_card_layout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <com.google.android.material.imageview.ShapeableImageView
+                    android:id="@+id/iv_baby_pic"
+                    imageBitmap="@{vm.pickedImage}"
+                    imageResource="@{vm.babyData.placeHolder}"
+                    android:layout_width="230dp"
+                    android:layout_height="0dp"
+                    android:scaleType="centerCrop"
+                    app:layout_constraintBottom_toBottomOf="@id/iv_card"
+                    app:layout_constraintDimensionRatio="w,1:1"
+                    app:layout_constraintEnd_toEndOf="@id/iv_card"
+                    app:layout_constraintStart_toStartOf="@id/iv_card"
+                    app:layout_constraintTop_toTopOf="@id/iv_card"
+                    app:layout_constraintVertical_bias="0.78"
+                    app:shapeAppearanceOverlay="@style/roundedImage"
+                    tools:srcCompat="@mipmap/default_place_holder_yellow" />
+
+
+                <ImageView
+                    android:id="@+id/iv_card"
+                    imageResource="@{vm.babyData.backgroundResource}"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:scaleType="center"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:srcCompat="@mipmap/android_elephant_popup" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="64dp"
+                    android:layout_marginEnd="64dp"
+                    android:maxLines="2"
+                    android:textAlignment="center"
+                    android:textSize="24sp"
+                    android:textStyle="bold"
+                    android:typeface="normal"
+                    app:layout_constraintBottom_toTopOf="@id/iv_month"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:text="@{vm.babyData.topText}"
+                    tools:text="Today christina ronaldo is" />
+
+                <androidx.appcompat.widget.AppCompatImageButton
+                    android:id="@+id/bt_change_pic"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@android:color/transparent"
+                    android:src="@mipmap/camera_icon_yellow"
+                    app:layout_constraintCircle="@id/iv_baby_pic"
+                    app:layout_constraintCircleAngle="45"
+                    app:layout_constraintCircleRadius="115dp"
+                    imageResource="@{vm.babyData.cameraIcon}"
+                    android:onClick="@{()-> vm.pickImage()}"
+                    tools:ignore="MissingConstraints" />
+
+                <androidx.appcompat.widget.AppCompatImageButton
+                    android:id="@+id/bt_close"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="8dp"
+                    android:background="@android:color/transparent"
+                    android:src="@mipmap/btn_close_blue"
+                    app:layout_constraintStart_toStartOf="parent"
+                    android:onClick="@{() -> vm.closeGiftCard()}"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <ImageView
+                    android:id="@+id/iv_month"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintBottom_toTopOf="@+id/iv_baby_pic"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.5"
+                    imageResource="@{vm.babyData.monthResource}"
+                    tools:srcCompat="@mipmap/m5" />
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="16dp"
+                    app:layout_constraintBottom_toBottomOf="@id/iv_month"
+                    app:layout_constraintEnd_toStartOf="@id/iv_month"
+                    app:layout_constraintTop_toTopOf="@id/iv_month"
+                    app:srcCompat="@mipmap/left_swirls" />
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    app:layout_constraintBottom_toBottomOf="@id/iv_month"
+                    app:layout_constraintStart_toEndOf="@id/iv_month"
+                    app:layout_constraintTop_toTopOf="@id/iv_month"
+
+                    app:srcCompat="@mipmap/right_swirls" />
+
+                <TextView
+                    android:id="@+id/tv_month_old"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:text="@string/month_old"
+                    android:textAllCaps="true"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toEndOf="@id/iv_month"
+                    app:layout_constraintStart_toStartOf="@id/iv_month"
+                    app:layout_constraintTop_toBottomOf="@id/iv_month" />
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/bt_share"
+                    android:layout_width="wrap_content"
+                    android:layout_height="40dp"
+                    android:background="@mipmap/btn_share"
+                    android:drawableEnd="@mipmap/ic_share_pink"
+                    android:drawablePadding="5dp"
+                    android:paddingStart="20dp"
+                    android:paddingEnd="10dp"
+                    android:text="@string/share_the_news"
+                    android:textAllCaps="false"
+                    android:textColor="#C65C5F"
+                    android:onClick="@{() -> vm.share()}"
+                    app:layout_constraintBottom_toTopOf="@id/iv_baby_pic"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tv_month_old" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </com.google.android.material.card.MaterialCardView>
+
+
+    </FrameLayout>
+</layout>

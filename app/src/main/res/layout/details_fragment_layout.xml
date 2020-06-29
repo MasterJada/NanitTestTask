@@ -34,6 +34,8 @@
             android:layout_marginTop="16dp"
             android:layout_marginEnd="16dp"
             android:hint="@string/name"
+            app:errorEnabled="true"
+            setError="@{vm.nameError}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/title">
@@ -41,7 +43,7 @@
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="textPersonName"
+                android:inputType="textPersonName|textCapWords"
                 android:maxLength="35"
                 android:text="@={vm.babyName}" />
         </com.google.android.material.textfield.TextInputLayout>
@@ -49,33 +51,53 @@
         <DatePicker
             android:id="@+id/datePicker"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="150dp"
             android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
             android:layout_marginEnd="16dp"
             android:calendarViewShown="false"
-            android:datePickerMode="spinner"
-            android:spinnersShown="true"
             android:date="@={vm.birthdayDate}"
+            android:datePickerMode="spinner"
+            android:padding="0dp"
+            android:spinnersShown="true"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/textInputLayout" />
 
         <com.google.android.material.imageview.ShapeableImageView
-            android:layout_width="200dp"
+            android:id="@+id/iv_baby_pic"
+            imageBitmap="@{vm.pickedImage}"
+            android:layout_width="150dp"
             android:layout_height="0dp"
             android:layout_marginTop="16dp"
-            app:shapeAppearanceOverlay="@style/roundedImage"
+            android:onClick="@{()-> vm.pickImage() }"
+            android:scaleType="centerCrop"
             app:layout_constraintDimensionRatio="1:1"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/datePicker"
-            app:srcCompat="@mipmap/ic_launcher"
-            android:onClick="@{()-> vm.pickImage() }"
-            imageBitmap="@{vm.pickedImage}"
-            android:scaleType="centerCrop"
-            />
+            app:shapeAppearanceOverlay="@style/roundedImage"
+            app:srcCompat="@mipmap/default_place_holder_yellow" />
 
+        <androidx.appcompat.widget.AppCompatImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintCircle="@id/iv_baby_pic"
+            app:layout_constraintCircleAngle="45"
+            app:layout_constraintCircleRadius="75dp"
+            app:srcCompat="@mipmap/camera_icon_yellow"
+            tools:ignore="MissingConstraints" />
+
+        <Button
+            style="@style/Widget.MaterialComponents.Button.OutlinedButton.Icon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:text="@string/generate_gift_card"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:onClick="@{() -> vm.validateDataAndMoveToBirthdayScreen()}"
+            app:layout_constraintTop_toBottomOf="@id/iv_baby_pic" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </layout>

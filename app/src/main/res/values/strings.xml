@@ -1,4 +1,8 @@
 <resources>
     <string name="app_name">Nanit Test Task</string>
     <string name="name">Name</string>
+    <string name="month_old">month old!</string>
+    <string name="share_the_news">Share the news</string>
+    <string name="baby_name">Today %s is</string>
+    <string name="generate_gift_card">Generate gift card</string>
 </resources>

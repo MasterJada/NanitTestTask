@@ -1,10 +1,14 @@
 package dev.jetlaunch.nanittesttask.utils
 
 import android.graphics.Bitmap
+import android.view.View
 import android.widget.DatePicker
 import android.widget.ImageView
+import androidx.appcompat.widget.AppCompatImageView
 import androidx.databinding.*
 import com.google.android.material.imageview.ShapeableImageView
+import com.google.android.material.textfield.TextInputEditText
+import com.google.android.material.textfield.TextInputLayout
 import java.util.*
 
 @BindingAdapter("android:date")
@@ -31,15 +35,35 @@ fun setListeners(
     dateChangedListener: DatePicker.OnDateChangedListener?,
     inverseBindingListener: InverseBindingListener?
 ) {
-    val newListener = if(inverseBindingListener == null) dateChangedListener
+    val newListener = if (inverseBindingListener == null) dateChangedListener
     else DatePicker.OnDateChangedListener { _, _, _, _ -> inverseBindingListener.onChange() }
-    datePicker.init(datePicker.year,datePicker.month,datePicker.dayOfMonth, newListener)
+    datePicker.init(datePicker.year, datePicker.month, datePicker.dayOfMonth, newListener)
 }
 
 @BindingAdapter("imageBitmap")
-fun setBitmap(imageView: ShapeableImageView, bmp: Bitmap?){
-    if(bmp == null) return
+fun setBitmap(imageView: ShapeableImageView, bmp: Bitmap?) {
+    if (bmp == null) return
     imageView.setImageBitmap(bmp)
+}
+@BindingAdapter("backgroundImageResource")
+fun setBackgroundResource(view: View, resID: Int){
+    view.setBackgroundResource(resID)
+}
+
+@BindingAdapter("setError")
+fun setError(layout: TextInputLayout, error: String?) {
+    if (error.isNullOrEmpty()) {
+        layout.isErrorEnabled = false
+        layout.error = ""
+    } else {
+        layout.isErrorEnabled = true
+        layout.error = error
+    }
+}
+
+@BindingAdapter("imageResource")
+fun setImageResource(imageView: AppCompatImageView, resID: Int) {
+    imageView.setImageResource(resID)
 }
 
 
